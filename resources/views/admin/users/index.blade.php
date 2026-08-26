@@ -4,11 +4,8 @@
 
 @section('content')
 <div class="container py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="mb-4">
         <h3 class="fw-bold text-orange mb-0">Manage Users</h3>
-        <a href="{{ route('admin.users.create') }}" class="btn btn-purple">
-            <i class="fa-solid fa-user-plus me-1"></i> Add New User
-        </a>
     </div>
 
     @if(session('success'))

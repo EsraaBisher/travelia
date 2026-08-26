@@ -36,6 +36,18 @@
                             <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}" placeholder="e.g. Cairo & Pyramids Tour" required>
                         </div>
 
+                        <!-- Duration -->
+                        <div class="mb-3">
+                            <label for="duration" class="form-label fw-semibold text-purple">Duration</label>
+                            <input type="text" name="duration" id="duration" class="form-control" value="{{ old('duration') }}" placeholder="e.g. 5 days" required>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="mb-3">
+                            <label for="location" class="form-label fw-semibold text-purple">Location</label>
+                            <input type="text" name="location" id="location" class="form-control" value="{{ old('location') }}" placeholder="e.g. Cairo, Egypt" required>
+                        </div>
+
                         <!-- Price -->
                         <div class="mb-3">
                             <label for="price" class="form-label fw-semibold text-purple">Price ($)</label>

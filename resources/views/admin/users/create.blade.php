@@ -49,9 +49,18 @@
                         </div>
 
                         <!-- Password Confirmation -->
-                        <div class="mb-4">
+                        <div class="mb-3">
                             <label for="password_confirmation" class="form-label fw-semibold text-purple">Confirm Password</label>
                             <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="••••••••" required>
+                        </div>
+
+                        <!-- Role -->
+                        <div class="mb-4">
+                            <label for="role" class="form-label fw-semibold text-purple">User Role</label>
+                            <select name="role" id="role" class="form-select" required>
+                                <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
+                                <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                            </select>
                         </div>
 
                         <!-- Buttons -->
