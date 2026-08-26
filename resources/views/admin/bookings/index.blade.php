@@ -35,31 +35,34 @@
                                 <td class="fw-bold text-purple">{{ $booking->user->name ?? 'N/A' }}</td>
                                 <td>{{ $booking->package_name ?? $booking->destination }}</td>
                                 <td>{{ $booking->created_at ? $booking->created_at->format('Y-m-d') : 'N/A' }}</td>
+                                
+                              
                                 <td>
-                                    @if($booking->status == 'confirmed')
-                                        <span class="badge bg-success bg-opacity-10 text-success border border-success">Confirmed</span>
-                                    @elseif($booking->status == 'pending')
-                                        <span class="badge bg-warning bg-opacity-10 text-warning border border-warning">Pending</span>
-                                    @else
-                                        <span class="badge bg-danger bg-opacity-10 text-danger border border-danger">Cancelled</span>
-                                    @endif
-                                </td>
-                                <td class="text-end pe-4">
-                                    <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to cancel this booking?');">
+                                    <form action="{{ route('admin.bookings.updateStatus', $booking->id) }}" method="POST" class="d-inline">
                                         @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-outline-danger">
-                                            <i class="fa-solid fa-trash me-1"></i> Cancel
-                                        </button>
+                                        @method('PATCH')
+                                        <select name="status" onchange="this.form.submit()" class="form-select form-select-sm fw-semibold border-0 rounded-pill px-3 py-1 
+                                            {{ $booking->status == 'confirmed' ? 'bg-success bg-opacity-10 text-success' : '' }}
+                                            {{ $booking->status == 'pending' ? 'bg-warning bg-opacity-10 text-warning' : '' }}
+                                            {{ $booking->status == 'cancelled' ? 'bg-danger bg-opacity-10 text-danger' : '' }}">
+                                            <option value="pending" {{ $booking->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                            <option value="confirmed" {{ $booking->status == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
+                                            <option value="cancelled" {{ $booking->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                                        </select>
                                     </form>
                                 </td>
-                            </tr>
-                        @empty
+
+                                <td class="text-end pe-4">
+                                    <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this booking?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        @empty
                             <tr>
                                 <td colspan="6" class="text-center py-4 text-muted">No bookings found.</td>
                             </tr>
                         @endforelse
                     </tbody>
+                </table>
                 </table>
             </div>
         </div>
