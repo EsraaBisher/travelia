@@ -74,3 +74,6 @@ Route::post('/subscribe', function (Request $request) {
 Route::get('/about-us', function () {
     return view('about');
 });
+Route::get('/profile', function () {
+    return view('profile');
+})->middleware('auth')->name('profile');
