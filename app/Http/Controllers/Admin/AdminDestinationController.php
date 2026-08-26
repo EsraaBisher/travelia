@@ -11,7 +11,7 @@ class AdminDestinationController extends Controller
     // 1. عرض كل الوجهات
     public function index()
     {
-        $destinations = Destination::latest()->paginate(10);
+        $destinations = Destination::orderBy('id', 'asc')->paginate(10);
         return view('admin.destinations.index', compact('destinations'));
     }
 
