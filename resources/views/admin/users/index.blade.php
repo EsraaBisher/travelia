@@ -1,11 +1,13 @@
 @extends('layouts.app')
 
+@section('title', 'Manage Users - E-Travel')
+
 @section('content')
-<div class="container-fluid py-4">
+<div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h3 class="fw-bold mb-0">Manage Users</h3>
-        <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
-            <i class="bi bi-person-plus me-1"></i> Add New User
+        <h3 class="fw-bold text-orange mb-0">Manage Users</h3>
+        <a href="{{ route('admin.users.create') }}" class="btn btn-purple">
+            <i class="fa-solid fa-user-plus me-1"></i> Add New User
         </a>
     </div>
 
@@ -32,7 +34,7 @@
                         @forelse($users as $user)
                             <tr>
                                 <td class="ps-4">{{ $user->id }}</td>
-                                <td class="fw-bold">{{ $user->name }}</td>
+                                <td class="fw-bold text-purple">{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->created_at->format('Y-m-d') }}</td>
                                 <td class="text-end pe-4">
@@ -40,7 +42,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-outline-danger">
-                                            <i class="bi bi-trash"></i> Delete
+                                            <i class="fa-solid fa-trash"></i> Delete
                                         </button>
                                     </form>
                                 </td>

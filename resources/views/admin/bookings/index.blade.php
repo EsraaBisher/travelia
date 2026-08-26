@@ -1,104 +1,73 @@
-@extends('admin.layouts.app')
+@extends('layouts.app')
 
-@section('title', 'Bookings')
-@section('page_title', 'Bookings Management')
+@section('title', 'Manage Bookings - E-Travel')
 
 @section('content')
-
-<!-- Header Description -->
-<div class="mb-4">
-    <p class="text-muted mb-0">Monitor, filter, and change user reservation statuses.</p>
-</div>
-
-<!-- Alert Success Message -->
-@if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4" role="alert">
-        <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="fw-bold text-orange mb-0">Manage Bookings</h3>
     </div>
-@endif
 
-<!-- Bookings Table Card -->
-<div class="card border-0 shadow-sm rounded-3">
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
-                <thead class="table-light">
-                    <tr>
-                        <th class="ps-3">#ID</th>
-                        <th>User</th>
-                        <th>Destination</th>
-                        <th>Booking Date</th>
-                        <th>Status</th>
-                        <th class="text-end pe-4">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse($bookings as $booking)
+    @if(session('success'))
+        <div class="alert alert-success border-0 shadow-sm mb-4">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <div class="card border-0 shadow-sm rounded-3">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
                         <tr>
-                            <td class="ps-3 fw-bold">#{{ $booking->id }}</td>
-                            <td>
-                                <div class="fw-semibold">{{ $booking->user->name ?? 'N/A' }}</div>
-                                <small class="text-muted">{{ $booking->user->email ?? '' }}</small>
-                            </td>
-                            <td class="fw-semibold text-theme">
-                                {{ $booking->destination->title ?? 'Destination Removed' }}
-                            </td>
-                            <td>
-                                <i class="bi bi-calendar3 text-muted me-1"></i>
-                                {{ $booking->created_at ? $booking->created_at->format('Y-m-d') : 'N/A' }}
-                            </td>
-                            <td>
-                                @if($booking->status == 'confirmed')
-                                    <span class="badge bg-success-subtle text-success border border-success px-3 py-2 rounded-pill">Confirmed</span>
-                                @elseif($booking->status == 'pending')
-                                    <span class="badge bg-warning-subtle text-warning border border-warning px-3 py-2 rounded-pill">Pending</span>
-                                @else
-                                    <span class="badge bg-danger-subtle text-danger border border-danger px-3 py-2 rounded-pill">Cancelled</span>
-                                @endif
-                            </td>
-                            <td class="text-end pe-4">
-                                <div class="d-flex justify-content-end align-items-center gap-2">
-                                    
-                                    <!-- Change Status Dropdown/Form -->
-                                    <form action="{{ route('admin.bookings.updateStatus', $booking->id) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        @method('PATCH')
-                                        <select name="status" onchange="this.form.submit()" class="form-select form-select-sm border-secondary-subtle">
-                                            <option value="pending" {{ $booking->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                                            <option value="confirmed" {{ $booking->status == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
-                                            <option value="cancelled" {{ $booking->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
-                                        </select>
-                                    </form>
-
-                                    <!-- Delete Button -->
-                                    <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this booking?');" class="d-inline">
+                            <th class="ps-4">#</th>
+                            <th>User Name</th>
+                            <th>Destination / Package</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th class="text-end pe-4">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($bookings as $booking)
+                            <tr>
+                                <td class="ps-4">{{ $booking->id }}</td>
+                                <td class="fw-bold text-purple">{{ $booking->user->name ?? 'N/A' }}</td>
+                                <td>{{ $booking->package_name ?? $booking->destination }}</td>
+                                <td>{{ $booking->created_at ? $booking->created_at->format('Y-m-d') : 'N/A' }}</td>
+                                <td>
+                                    @if($booking->status == 'confirmed')
+                                        <span class="badge bg-success bg-opacity-10 text-success border border-success">Confirmed</span>
+                                    @elseif($booking->status == 'pending')
+                                        <span class="badge bg-warning bg-opacity-10 text-warning border border-warning">Pending</span>
+                                    @else
+                                        <span class="badge bg-danger bg-opacity-10 text-danger border border-danger">Cancelled</span>
+                                    @endif
+                                </td>
+                                <td class="text-end pe-4">
+                                    <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to cancel this booking?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-outline-danger">
-                                            <i class="bi bi-trash"></i>
+                                            <i class="fa-solid fa-trash me-1"></i> Cancel
                                         </button>
                                     </form>
-                                </div>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="6" class="text-center py-5 text-muted">
-                                <i class="bi bi-calendar-x fs-1 d-block mb-2 text-secondary"></i>
-                                No bookings found yet.
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center py-4 text-muted">No bookings found.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
+        @if(method_exists($bookings, 'hasPages') && $bookings->hasPages())
+            <div class="card-footer bg-white border-0 py-3">
+                {{ $bookings->links() }}
+            </div>
+        @endif
     </div>
-    @if($bookings->hasPages())
-        <div class="card-footer bg-white border-0 py-3">
-            {{ $bookings->links() }}
-        </div>
-    @endif
 </div>
-
 @endsection
