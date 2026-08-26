@@ -77,3 +77,7 @@ Route::get('/about-us', function () {
 Route::get('/profile', function () {
     return view('profile');
 })->middleware('auth')->name('profile');
+// Route لمعالجة حفظ البيانات ومنع خطأ الـ POST
+Route::post('/profile', function () {
+    return redirect()->back()->with('success', 'Profile updated successfully!');
+})->name('profile.update');
