@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Destination extends Model
 {
-    protected $fillable = [
-        'name',
-        'description',
-        'image',
-        'price',
-        'duration',
-    ];
+   protected $fillable = [
+    'name',
+    'duration',
+    'description',
+    'price',
+    'location',
+    'image',
+];
 
     public function bookings(): HasMany
     {
