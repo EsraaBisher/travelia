@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TourController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -183,3 +184,12 @@ Route::middleware(['auth'])
         )->name('bookings.updateStatus');
 
     });
+
+// The route for your main cards page
+Route::get('/tours', [TourController::class, 'index'])->name('tours.index');
+
+// The route for your new Add Tour page
+Route::get('/tours/create', [TourController::class, 'create'])->name('tours.create');
+
+// Route to handle saving the form data
+Route::post('/tours', [TourController::class, 'store'])->name('tours.store');
