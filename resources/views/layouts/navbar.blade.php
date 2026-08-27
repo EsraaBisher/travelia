@@ -48,23 +48,6 @@
                 </li>
 
 
-                @auth
-                    @if (Auth::user()->role === 'admin')
-                        <!-- Destinations -->
-                        <li class="nav-item">
-
-                            <a
-                                class="nav-link {{ request()->routeIs('admin.destinations.*') ? 'active' : '' }}"
-                                href="{{ route('admin.destinations.index') }}"
-                            >
-                                Destinations
-                            </a>
-
-                        </li>
-                    @endif
-                @endauth
-
-
                 <!-- About Us -->
                 <li class="nav-item">
 

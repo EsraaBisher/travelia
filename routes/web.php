@@ -149,6 +149,7 @@ Route::middleware(['auth'])
 
 
         Route::delete('/bookings/{id}', function ($id) {
+            Booking::findOrFail($id)->delete();
 
             return redirect()
                 ->route('admin.bookings.index')
