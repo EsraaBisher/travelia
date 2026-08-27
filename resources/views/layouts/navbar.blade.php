@@ -47,7 +47,10 @@
 
                 </li>
 
+<<<<<<< HEAD
                 <!-- Destinations -->
+=======
+>>>>>>> 022cc3e516cd4b399a5ceab5590ea43c7f7c9173
                 <li class="nav-item">
 
                     <a
@@ -59,12 +62,18 @@
 
                 </li>
 
+<<<<<<< HEAD
                 <!-- Tour Package -->
                 <li class="nav-item">
+=======
+                <li class="nav-item">
+                    <!-- Fixed routeIs to 'tours.*' so the highlight works -->
+>>>>>>> 022cc3e516cd4b399a5ceab5590ea43c7f7c9173
                     <a class="nav-link {{ request()->routeIs('tours.*') ? 'active' : '' }}" href="{{ route('tours.index') }}">
                         Tour Package
                     </a>
                 </li>
+<<<<<<< HEAD
                 
                 <!-- NEW: Bookings -->
                 <li class="nav-item">
@@ -75,6 +84,9 @@
                         Bookings
                     </a>
                 </li>
+=======
+
+>>>>>>> 022cc3e516cd4b399a5ceab5590ea43c7f7c9173
 
                 <!-- About Us -->
                 <li class="nav-item">
@@ -296,4 +308,8 @@
 
     }
 
+<<<<<<< HEAD
 </style>
+=======
+</style>
+>>>>>>> 022cc3e516cd4b399a5ceab5590ea43c7f7c9173

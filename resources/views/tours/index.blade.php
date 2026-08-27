@@ -35,11 +35,14 @@
 
 <!-- Main Container -->
 <div class="container py-5">
+<<<<<<< HEAD
     @if(session('success'))
     <div class="alert alert-success border-0 shadow-sm mb-4">
         {{ session('success') }}
     </div>
     @endif
+=======
+>>>>>>> 022cc3e516cd4b399a5ceab5590ea43c7f7c9173
         <div class="text-center mt-3">
             <h1 class=" justify-content-center mb-5">Let's See Where Your <b style="color: #5f3475">Vacation</b> Will Be.. </h1>
         </div>
@@ -136,6 +139,7 @@
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
 
 
                     <!-- We wrap the footer in a form to submit the booking -->
@@ -167,6 +171,14 @@
                     </form>
 
 
+=======
+                    <div class="modal-footer border-top-0 pt-0">
+                        <button type="button" class="btn btn-secondary rounded-3 px-4" data-bs-dismiss="modal">Close</button>
+                        <a href="{{ route('admin.bookings.index') }}" class="btn btn-custom-purple rounded-3 px-4 fw-bold">
+                            Book Now
+                        </a>
+                    </div>
+>>>>>>> 022cc3e516cd4b399a5ceab5590ea43c7f7c9173
                 </div>
             </div>
         </div>

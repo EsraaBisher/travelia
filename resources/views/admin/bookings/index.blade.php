@@ -25,10 +25,14 @@
                             <th>Destination / Package</th>
                             <th>Date</th>
                             <th>Status</th>
+<<<<<<< HEAD
                             <!-- Only show the Actions column header to admins -->
                             @if(auth()->user()->role === 'admin')
                                 <th class="text-end pe-4">Actions</th>
                             @endif
+=======
+                            <th class="text-end pe-4">Actions</th>
+>>>>>>> 022cc3e516cd4b399a5ceab5590ea43c7f7c9173
                         </tr>
                     </thead>
                     <tbody>
@@ -37,6 +41,7 @@
                                 <td class="ps-4">{{ $booking->id }}</td>
                                 <td class="fw-bold text-purple">{{ $booking->user->name ?? 'N/A' }}</td>
                                 <td>{{ $booking->destination->name ?? 'N/A' }}</td>
+<<<<<<< HEAD
                                 <td>{{ $booking->booking_date ? \Carbon\Carbon::parse($booking->booking_date)->format('Y-m-d') : 'N/A' }}</td>
                                 
                                 <!-- Status Column -->
@@ -83,6 +88,39 @@
                             <tr>
                                 <!-- Updated colspan to 5 for regular users, 6 for admins -->
                                 <td colspan="{{ auth()->user()->role === 'admin' ? '6' : '5' }}" class="text-center py-4 text-muted">No bookings found.</td>
+=======
+                                <td>{{ $booking->booking_date ? $booking->booking_date->format('Y-m-d') : 'N/A' }}</td>
+                                
+                              
+                                <td>
+                                    <form action="{{ route('admin.bookings.updateStatus', $booking->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('PATCH')
+                                        <select name="status" onchange="this.form.submit()" class="form-select form-select-sm fw-semibold border-0 rounded-pill px-3 py-1 
+                                            {{ $booking->status == 'confirmed' ? 'bg-success bg-opacity-10 text-success' : '' }}
+                                            {{ $booking->status == 'pending' ? 'bg-warning bg-opacity-10 text-warning' : '' }}
+                                            {{ $booking->status == 'cancelled' ? 'bg-danger bg-opacity-10 text-danger' : '' }}">
+                                            <option value="pending" {{ $booking->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                            <option value="confirmed" {{ $booking->status == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
+                                            <option value="cancelled" {{ $booking->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                                        </select>
+                                    </form>
+                                </td>
+
+                                <td class="text-end pe-4">
+                                    <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this booking?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            <i class="fa-solid fa-trash"></i> Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center py-4 text-muted">No bookings found.</td>
+>>>>>>> 022cc3e516cd4b399a5ceab5590ea43c7f7c9173
                             </tr>
                         @endforelse
                     </tbody>
