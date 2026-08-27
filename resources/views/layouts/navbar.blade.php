@@ -37,34 +37,40 @@
 
                 <!-- Home -->
                 <li class="nav-item">
+
                     <a
                         class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}"
                         href="{{ route('home') }}"
                     >
                         Home
                     </a>
+
                 </li>
 
 
                 <!-- Destinations -->
                 <li class="nav-item">
+
                     <a
-                        class="nav-link"
-                        href="#"
+                        class="nav-link {{ request()->routeIs('admin.destinations.*') ? 'active' : '' }}"
+                        href="{{ route('admin.destinations.index') }}"
                     >
                         Destinations
                     </a>
+
                 </li>
 
 
                 <!-- About Us -->
                 <li class="nav-item">
+
                     <a
-                        class="nav-link"
-                        href="#"
+                        class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}"
+                        href="{{ route('about') }}"
                     >
                         About Us
                     </a>
+
                 </li>
 
             </ul>
@@ -106,21 +112,30 @@
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                         >
+
                             <i class="fa-solid fa-user me-1"></i>
+
                             {{ Auth::user()->name }}
+
                         </button>
 
 
                         <ul class="dropdown-menu dropdown-menu-end">
 
+                            <!-- Profile -->
                             <li>
+
                                 <a
                                     class="dropdown-item"
-                                    href="#"
+                                    href="{{ route('profile') }}"
                                 >
+
                                     <i class="fa-solid fa-user me-2 text-purple"></i>
+
                                     My Profile
+
                                 </a>
+
                             </li>
 
 
@@ -129,15 +144,22 @@
                             </li>
 
 
+                            <!-- Logout -->
                             <li>
 
                                 <a
                                     class="dropdown-item"
                                     href="{{ route('logout') }}"
-                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                    onclick="
+                                        event.preventDefault();
+                                        document.getElementById('logout-form').submit();
+                                    "
                                 >
+
                                     <i class="fa-solid fa-right-from-bracket me-2 text-purple"></i>
+
                                     Logout
+
                                 </a>
 
 
@@ -147,7 +169,9 @@
                                     method="POST"
                                     class="d-none"
                                 >
+
                                     @csrf
+
                                 </form>
 
                             </li>
@@ -166,8 +190,11 @@
                         href="tel:+123456789"
                         class="text-decoration-none text-dark fw-bold"
                     >
+
                         <i class="fa-solid fa-phone text-orange me-1"></i>
+
                         +123 456 789
+
                     </a>
 
                 </div>
@@ -222,12 +249,6 @@
     .btn-outline-purple:hover {
         background-color: #5f3475;
         border-color: #5f3475;
-        color: #fff;
-    }
-
-
-    .btn-outline-purple:hover,
-    .dropdown-item:hover {
         color: #fff;
     }
 

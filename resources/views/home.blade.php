@@ -330,7 +330,7 @@
                             {{ $package['price'] }}
                         </span>
 
-                        <a href="#" class="btn btn-sm btn-outline-purple">
+                        <a href="{{ route('admin.bookings.index') }}" class="btn btn-sm btn-outline-purple">
                             Book Now
                         </a>
 
@@ -474,59 +474,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 {{--  --}}
 
-<!--  BLOG PREVIEW  -->
-<section id="blog" class="container py-5">
 
-    <h3 class="fw-bold mb-4">
-        Our Blog
-    </h3>
-
-
-    <div class="row g-4">
-
-        @for($i = 1; $i <= 3; $i++)
-
-        <div class="col-md-4">
-
-            <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
-
-                <img
-                    src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
-                    class="card-img-top"
-                    height="160"
-                    style="object-fit: cover;"
-                    alt="Travel Blog"
-                >
-
-                <div class="card-body">
-
-                    <h6 class="fw-bold">
-                        The Amazing Difference in New Traveling
-                    </h6>
-
-                    <p class="text-muted small">
-                        Being able to travel gives a unique
-                        perspective to life...
-                    </p>
-
-                    <a
-                        href="#"
-                        class="text-orange text-decoration-none small fw-bold"
-                    >
-                        Read More →
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        @endfor
-
-    </div>
-
-</section>
 
 
 {{--  --}}
