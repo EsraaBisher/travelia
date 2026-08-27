@@ -10,7 +10,7 @@ class AdminBookingController extends Controller
 {
     public function index()
     {
-<<<<<<< HEAD
+
         // Check if the logged-in user is an admin
         if (auth()->user()->role === 'admin') {
             // Admins see EVERYONE'S bookings
@@ -23,9 +23,9 @@ class AdminBookingController extends Controller
                 ->paginate(10);
         }
 
-=======
+
         $bookings = Booking::with(['user', 'destination'])->latest()->paginate(10);
->>>>>>> 022cc3e516cd4b399a5ceab5590ea43c7f7c9173
+
         return view('admin.bookings.index', compact('bookings'));
     }
 
@@ -68,8 +68,5 @@ class AdminBookingController extends Controller
 
         return redirect()->back()->with('success', 'Booking request submitted successfully!');
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> 022cc3e516cd4b399a5ceab5590ea43c7f7c9173

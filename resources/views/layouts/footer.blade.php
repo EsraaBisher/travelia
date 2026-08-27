@@ -19,22 +19,20 @@
                 </div>
             </div>
 
-            <!-- About Us -->
+            {{-- <!-- About Us -->
             <div class="col-6 col-lg-2 mb-4 footer-links">
-                <h6 class="fw-bold mb-3">About us</h6>
-                <a href="#">Our Story</a>
-                <a href="#">Work with us</a>
-                <a href="#">Press</a>
-                <a href="#">Privacy</a>
-            </div>
-
-            <!-- Company -->
-            <div class="col-6 col-lg-2 mb-4 footer-links">
-                <h6 class="fw-bold mb-3">Company</h6>
-                <a href="#">Partners</a>
-                <a href="#">Careers</a>
-                <a href="#">Blog</a>
+                <h6 class="fw-bold mb-3">About Us</h6>
+                <a href="{{ route('about') }}">About Us</a>
+                <a href="#">Contact Us</a>
                 <a href="#">FAQs</a>
+            </div> --}}
+
+            <!-- Travelia -->
+            <div class="col-6 col-lg-2 mb-4 footer-links">
+                <h6 class="fw-bold mb-3">Travelia</h6>
+                <a href="{{ route('tours.index') }}">Tours</a>
+                <a   href="{{ route('admin.destinations.index') }}">Destinations</a>
+                <a href="{{ route('admin.bookings.index') }}">My Bookings</a>
             </div>
 
             <!-- Support -->

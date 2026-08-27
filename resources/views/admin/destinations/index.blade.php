@@ -74,8 +74,8 @@
         @endif
     </div>
 </div>
-<<<<<<< HEAD
+
 @endsection
-=======
-@endsection
->>>>>>> 022cc3e516cd4b399a5ceab5590ea43c7f7c9173
+
+
+
