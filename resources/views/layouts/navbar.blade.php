@@ -47,6 +47,24 @@
 
                 </li>
 
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link {{ request()->routeIs('admin.destinations.*') ? 'active' : '' }}"
+                        href="{{ route('admin.destinations.index') }}"
+                    >
+                        Destinations
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+                    <!-- Fixed routeIs to 'tours.*' so the highlight works -->
+                    <a class="nav-link {{ request()->routeIs('tours.*') ? 'active' : '' }}" href="{{ route('tours.index') }}">
+                        Tour Package
+                    </a>
+                </li>
+
 
                 <!-- About Us -->
                 <li class="nav-item">
