@@ -43,7 +43,7 @@
                                         </div>
                                     @endif
                                 </td>
-                                <td class="fw-bold text-purple">{{ $destination->title }}</td>
+                                <td class="fw-bold text-purple">{{ $destination->name }}</td>
                                 <td>${{ number_format($destination->price, 2) }}</td>
                                 <td class="text-end pe-4">
                                     <a href="{{ route('admin.destinations.edit', $destination->id) }}" class="btn btn-sm btn-outline-purple me-1">
