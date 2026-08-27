@@ -11,10 +11,16 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+<<<<<<< Updated upstream
         $middleware->redirectTo(
             guests: '/login',
             users: '/' //
         );
+=======
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        ]);
+>>>>>>> Stashed changes
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

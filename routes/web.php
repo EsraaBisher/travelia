@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminDestinationController;
 
@@ -18,6 +19,10 @@ Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])
     ->name('home');
+
+Route::post('/bookings', [BookingController::class, 'store'])
+    ->middleware('auth')
+    ->name('bookings.store');
 
 
 
@@ -65,6 +70,7 @@ Route::post('/subscribe', function (Request $request) {
 Route::middleware(['auth'])
     ->prefix('admin')
     ->name('admin.')
+    ->middleware('admin')
     ->group(function () {
 
         

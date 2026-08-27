@@ -48,17 +48,21 @@
                 </li>
 
 
-                <!-- Destinations -->
-                <li class="nav-item">
+                @auth
+                    @if (Auth::user()->role === 'admin')
+                        <!-- Destinations -->
+                        <li class="nav-item">
 
-                    <a
-                        class="nav-link {{ request()->routeIs('admin.destinations.*') ? 'active' : '' }}"
-                        href="{{ route('admin.destinations.index') }}"
-                    >
-                        Destinations
-                    </a>
+                            <a
+                                class="nav-link {{ request()->routeIs('admin.destinations.*') ? 'active' : '' }}"
+                                href="{{ route('admin.destinations.index') }}"
+                            >
+                                Destinations
+                            </a>
 
-                </li>
+                        </li>
+                    @endif
+                @endauth
 
 
                 <!-- About Us -->

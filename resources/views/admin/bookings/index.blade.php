@@ -33,8 +33,8 @@
                             <tr>
                                 <td class="ps-4">{{ $booking->id }}</td>
                                 <td class="fw-bold text-purple">{{ $booking->user->name ?? 'N/A' }}</td>
-                                <td>{{ $booking->package_name ?? $booking->destination }}</td>
-                                <td>{{ $booking->created_at ? $booking->created_at->format('Y-m-d') : 'N/A' }}</td>
+                                <td>{{ $booking->destination->name ?? 'N/A' }}</td>
+                                <td>{{ $booking->booking_date ? $booking->booking_date->format('Y-m-d') : 'N/A' }}</td>
                                 
                               
                                 <td>
@@ -56,13 +56,18 @@
                                     <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this booking?');">
                                         @csrf
                                         @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            <i class="fa-solid fa-trash"></i> Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
                                         @empty
                             <tr>
                                 <td colspan="6" class="text-center py-4 text-muted">No bookings found.</td>
                             </tr>
                         @endforelse
                     </tbody>
-                </table>
                 </table>
             </div>
         </div>

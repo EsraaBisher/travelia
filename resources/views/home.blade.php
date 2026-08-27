@@ -194,6 +194,12 @@
 <!-- TOUR PACKAGES PREVIEW -->
 <section id="packages" class="container py-5">
 
+    @if(session('success'))
+        <div class="alert alert-success border-0 shadow-sm mb-4">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="text-center mb-5">
 
         <h2 class="fw-bold">
@@ -230,78 +236,21 @@
 
     <div class="row g-4" id="packages-container">
 
-        @foreach([
-            [
-                'place' => 'Maldives',
-                'price' => '620$',
-                'rating' => '4.9',
-                'category' => 'special',
-                'image' => 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e'
-            ],
-            [
-                'place' => 'Indonesia',
-                'price' => '750$',
-                'rating' => '4.8',
-                'category' => 'special',
-                'image' => 'https://images.unsplash.com/photo-1537996194471-e657df975ab4'
-            ],
-            [
-                'place' => 'Spain',
-                'price' => '550$',
-                'rating' => '4.7',
-                'category' => 'popular',
-                'image' => 'https://images.unsplash.com/photo-1539037116277-4db20889f2d4'
-            ],
-            [
-                'place' => 'Maldives',
-                'price' => '620$',
-                'rating' => '4.7',
-                'category' => 'popular',
-                'image' => 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99'
-            ],
-            [
-                'place' => 'Canada',
-                'price' => '620$',
-                'rating' => '4.7',
-                'category' => 'recommendations',
-                'image' => 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34'
-            ],
-            [
-                'place' => 'Maldives',
-                'price' => '820$',
-                'rating' => '4.7',
-                'category' => 'recommendations',
-                'image' => 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c'
-            ],
-            [
-                'place' => 'French',
-                'price' => '550$',
-                'rating' => '4.7',
-                'category' => 'popular',
-                'image' => 'https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a'
-            ],
-            [
-                'place' => 'Australia',
-                'price' => '310$',
-                'rating' => '4.7',
-                'category' => 'recommendations',
-                'image' => 'https://images.unsplash.com/photo-1539367628448-4bc5c9d171c8'
-            ]
-        ] as $package)
+        @forelse($destinations as $destination)
 
         <div
             class="col-lg-3 col-md-4 col-sm-6 package-card"
-            data-category="{{ $package['category'] }}"
+            data-category="special"
         >
 
             <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
 
                 <img
-                    src="{{ $package['image'] }}"
+                    src="{{ $destination->image ? asset('storage/' . $destination->image) : 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e' }}"
                     class="card-img-top"
                     height="200"
                     style="object-fit: cover;"
-                    alt="{{ $package['place'] }}"
+                    alt="{{ $destination->name }}"
                 >
 
                 <div class="card-body">
@@ -310,29 +259,37 @@
 
                         <span>
                             <i class="fa-solid fa-location-dot text-orange"></i>
-                            {{ $package['place'] }}
+                            {{ $destination->name }}
                         </span>
 
                         <span>
                             <i class="fa-solid fa-star text-warning"></i>
-                            {{ $package['rating'] }}
+                            New
                         </span>
 
                     </div>
 
                     <h6 class="fw-bold mb-3">
-                        Amazing {{ $package['place'] }} Tour
+                        {{ $destination->name }} Tour
                     </h6>
 
                     <div class="d-flex justify-content-between align-items-center">
 
                         <span class="text-orange fw-bold">
-                            {{ $package['price'] }}
+                            ${{ number_format($destination->price, 2) }}
                         </span>
 
-                        <a href="{{ route('admin.bookings.index') }}" class="btn btn-sm btn-outline-purple">
-                            Book Now
-                        </a>
+                        @auth
+                            <form method="POST" action="{{ route('bookings.store') }}">
+                                @csrf
+                                <input type="hidden" name="destination_id" value="{{ $destination->id }}">
+                                <input type="date" name="booking_date" min="{{ now()->toDateString() }}" required class="form-control form-control-sm mb-2">
+                                <input type="number" name="number_of_people" min="1" value="1" required class="form-control form-control-sm mb-2">
+                                <button type="submit" class="btn btn-sm btn-outline-purple">Book Now</button>
+                            </form>
+                        @else
+                            <a href="{{ route('login') }}" class="btn btn-sm btn-outline-purple">Book Now</a>
+                        @endauth
 
                     </div>
 
@@ -342,7 +299,9 @@
 
         </div>
 
-        @endforeach
+        @empty
+            <div class="col-12 text-center text-muted">No destinations are available yet.</div>
+        @endforelse
 
     </div>
 
